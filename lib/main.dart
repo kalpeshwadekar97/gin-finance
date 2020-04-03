@@ -15,6 +15,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: basicTheme(),
       routes: <String, WidgetBuilder>{
+        Strings.ROUTE_WELCOME: (BuildContext context) => WelcomeScreen(),
         Strings.ROUTE_REGISTRATION: (BuildContext context) => RegistrationScreen()
       },
     );
