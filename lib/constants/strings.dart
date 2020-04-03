@@ -12,5 +12,6 @@ class Strings {
   static const String HINT_ENTER_EMAIL = "Please enter your Email ID";
 
   // Routes
-  static const String ROUTE_REGISTRATION = "registration";
+  static const String ROUTE_REGISTRATION = "registration_screen";
+  static const String ROUTE_WELCOME = "welcome_screen";
 }

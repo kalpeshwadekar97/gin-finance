@@ -26,7 +26,7 @@ class _GinFinanceInputTextState extends State<GinFinanceTextFormField> {
           border: InputBorder.none,
           labelText: widget.labelText,
           hintText: widget.hintText,
-          hintStyle: TextStyle(color: Colors.grey)
+          hintStyle: Theme.of(context).textTheme.body1
       ),
       validator: (String value) {
         return widget.validator(value);

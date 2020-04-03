@@ -8,9 +8,11 @@ ThemeData basicTheme() {
     accentColor: Color(ColorPalette.ACCEnt_COLOR),
     fontFamily: 'Roboto',
     textTheme: TextTheme(
-      headline: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
-      title: TextStyle(fontSize: 20.0, fontStyle: FontStyle.italic),
-      body1: TextStyle(fontSize: 14.0),
+      headline: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w700),
+      subhead: TextStyle(fontSize: 24.0),
+      title: TextStyle(fontSize: 20.0),
+      subtitle: TextStyle(fontSize: 18.0),
+      body1: TextStyle(fontSize: 16.0, color: Colors.grey)
     ),
   );
 }
