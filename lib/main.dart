@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gin_finance/themes/basic_theme.dart';
+import 'package:gin_finance/ui/screens/personal_information_screen.dart';
 import 'package:gin_finance/ui/screens/registration_screen.dart';
 import 'package:gin_finance/ui/screens/welcome_screen.dart';
 import 'constants/strings.dart';
@@ -16,7 +17,8 @@ class App extends StatelessWidget {
       theme: basicTheme(),
       routes: <String, WidgetBuilder>{
         Strings.ROUTE_WELCOME: (BuildContext context) => WelcomeScreen(),
-        Strings.ROUTE_REGISTRATION: (BuildContext context) => RegistrationScreen()
+        Strings.ROUTE_REGISTRATION: (BuildContext context) => RegistrationScreen(),
+        Strings.ROUTE_PERSONAL_INFORMATION: (BuildContext context) => PersonalInformationScreen()
       },
     );
   }

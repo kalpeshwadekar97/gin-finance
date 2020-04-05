@@ -5,6 +5,7 @@ class Constants {
   // page step number for state progress
   static const int welcomePageState = 1;
   static const int registrationPageState = 2;
+  static const int personalInformationPageState = 3;
 
   // password complexity parameters
   static const String UPPERCASE = 'uppercase';
@@ -27,4 +28,21 @@ class Constants {
     'Strong',
     'Very Strong'
   ];
+
+  static const List<String> GAOLS_LIST = [
+    '- Choose Option -',
+    'Goal 1',
+    'Goal 2',
+    'Goal 3',
+    'Goal 4'
+  ];
+
+  static const List<String> MONTHLY_INCOME_EXPENSE = [
+    '- Choose Option -',
+    'Less than 10,000/-',
+    '10,000/- to 50,000/-',
+    '50,000/- to 1,00,000/-',
+    'More than 1,00,000/-'
+  ];
+
 }
