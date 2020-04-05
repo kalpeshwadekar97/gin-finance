@@ -4,6 +4,7 @@ import 'package:gin_finance/constants/constants.dart';
 import 'package:gin_finance/constants/strings.dart';
 import 'package:gin_finance/ui/custom_widgets/custom_drop_down_menu.dart';
 import 'package:gin_finance/ui/custom_widgets/state_progress_bar.dart';
+import 'package:gin_finance/utility/helper.dart';
 
 class PersonalInformationScreen extends StatefulWidget {
   @override
@@ -105,33 +106,14 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
 
   void _validate(BuildContext context) {
     if (_selectedGoal.isEmpty) {
-      _showToast(context, Strings.error_select_goal);
+      Helper.showToast(context, Strings.error_select_goal, Strings.LABEL_OKAY);
     } else if (_selectedMonthlyIncome.isEmpty) {
-      _showToast(context, Strings.error_select_monthly_income);
+      Helper.showToast(context, Strings.error_select_monthly_income, Strings.LABEL_OKAY);
     } else if (_selectedMonthlyExpense.isEmpty) {
-      _showToast(context, Strings.error_select_monthly_expense);
+      Helper.showToast(context, Strings.error_select_monthly_expense, Strings.LABEL_OKAY);
     } else {
       // we can also have other validations like monthly expense should not be greater than monthly income
       // navigate to next screen
     }
-  }
-
-  void _showToast(BuildContext context, String msg) {
-    final scaffold = Scaffold.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-          backgroundColor: Colors.redAccent,
-          content: Text(
-            msg,
-            style: Theme.of(context)
-                .textTheme
-                .body1
-                .copyWith(color: Colors.white, fontWeight: FontWeight.w700),
-          ),
-          action: SnackBarAction(
-              textColor: Colors.black,
-              label: Strings.LABEL_OKAY,
-              onPressed: scaffold.hideCurrentSnackBar)),
-    );
   }
 }
