@@ -8,15 +8,27 @@ class Strings {
   static const String CREATE_PASSWORD = "Create Password";
   static const String CREATE_PASSWORD_SUBTITLE = "Password will be used to login to account";
   static const String ENTER_PASSWORD = "Please enter password";
+  static const String PERSONAL_INFORMATION = "Personal Information";
+  static const String PERSONAL_INFORMATION_SUBTITLE = "Please fill in the information below and your goal for digital saving.";
+  static const String GOAL_FOR_ACTIVATION = "Goal for activation";
+  static const String MONTHLY_INCOME = "monthly_income";
+  static const String MONTHLY_EXPENSE = "monthly_expense";
 
   //Labels
   static const String LABEL_NEXT = "Next";
+  static const String LABEL_OKAY = "OKAY!";
 
   //Hints
   static const String HINT_ENTER_EMAIL = "Email";
   static const String HINT_CREATE_PASSWORD = "Create Password";
 
   // Routes
-  static const String ROUTE_REGISTRATION = "registration_screen";
   static const String ROUTE_WELCOME = "welcome_screen";
+  static const String ROUTE_REGISTRATION = "registration_screen";
+  static const String ROUTE_PERSONAL_INFORMATION = "personal_information";
+
+  // Error messages
+  static const String error_select_goal = "Please select goal for activation";
+  static const String error_select_monthly_income = "Please select your monthly income";
+  static const String error_select_monthly_expense = "Please select your monthly expense";
 }

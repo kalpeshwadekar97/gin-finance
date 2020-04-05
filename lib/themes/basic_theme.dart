@@ -6,6 +6,7 @@ ThemeData basicTheme() {
     brightness: Brightness.dark,
     primaryColor: Color(ColorPalette.PRIMARY_COLOR),
     accentColor: Color(ColorPalette.ACCENT_COLOR),
+    canvasColor: Colors.white,
     fontFamily: 'Roboto',
     textTheme: TextTheme(
       headline: TextStyle(fontSize: 50.0, fontWeight: FontWeight.w700),

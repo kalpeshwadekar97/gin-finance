@@ -245,6 +245,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
         onPressed: () {
           _validate();
+          Navigator.pushNamed(context, Strings.ROUTE_PERSONAL_INFORMATION);
         },
       ),
     );
