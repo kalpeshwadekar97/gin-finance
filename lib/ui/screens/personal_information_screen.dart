@@ -35,8 +35,11 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      StateProgressBar(Constants.totalStateCount,
-                          Constants.personalInformationPageState),
+                      Align(
+                        alignment: Alignment.center,
+                        child: StateProgressBar(Constants.totalStateCount,
+                            Constants.personalInformationPageState),
+                      ),
                       _getTitleText(),
                       Padding(padding: EdgeInsets.only(bottom: 20)),
                       _getSubTitleText(),

@@ -24,7 +24,7 @@ class _StateProgressBarState extends State<StateProgressBar> {
               child: Row(
                 children: <Widget>[
                   _getState(++index),
-                  index < widget._count ? _getLine() : Container()
+                  index < widget._count ? _getLine(context) : Container()
                 ],
               ),
             );
@@ -62,10 +62,10 @@ class _StateProgressBarState extends State<StateProgressBar> {
     ));
   }
 
-  _getLine() {
+  _getLine(BuildContext context) {
     return Container(
-      width: 35.0,
-      height: 5.0,
+      width: MediaQuery.of(context).size.width * 0.10,
+      height: 3.0,
       color: Colors.black,
     );
   }

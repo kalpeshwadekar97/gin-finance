@@ -3,10 +3,10 @@ class Constants {
   static const int totalStateCount = 4;
 
   // page step number for state progress
-  static const int welcomePageState = 0;
-  static const int registrationPageState = 1;
-  static const int personalInformationPageState = 2;
-  static const int scheduleVideoCallPageState = 3;
+  static const int welcomePageState = 1;
+  static const int registrationPageState = 2;
+  static const int personalInformationPageState = 3;
+  static const int scheduleVideoCallPageState = 4;
 
   // password complexity parameters
   static const String UPPERCASE = 'uppercase';

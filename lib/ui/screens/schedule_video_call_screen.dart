@@ -35,8 +35,11 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      StateProgressBar(Constants.totalStateCount,
-                          Constants.scheduleVideoCallPageState),
+                      Align(
+                        alignment: Alignment.center,
+                        child: StateProgressBar(Constants.totalStateCount,
+                            Constants.scheduleVideoCallPageState),
+                      ),
                       _getCalendarIcon(),
                       Padding(padding: EdgeInsets.only(bottom: 20)),
                       _getTitleText(),

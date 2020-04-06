@@ -44,8 +44,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    StateProgressBar(Constants.totalStateCount,
-                        Constants.registrationPageState),
+                    Align(
+                      alignment: Alignment.center,
+                      child: StateProgressBar(Constants.totalStateCount,
+                          Constants.registrationPageState),
+                    ),
                     _getTitleText(),
                     Padding(padding: EdgeInsets.only(bottom: 20)),
                     _getSubTitleText(),

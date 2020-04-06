@@ -12,7 +12,7 @@ class Strings {
   static const String PERSONAL_INFORMATION_SUBTITLE = "Please fill in the information below and your goal for digital saving.";
   static const String SCHEDULE_VIDEO_CALL = "Schedule Video Call";
   static const String SCHEDULE_VIDEO_CALL_SUBTITLE = "Choose the date and time that you preferred. we will send a link via email to make a video call on the schedule date and time.";
-  static const String THANK_YOU = "Thank You For Choosing Gin Finans";
+  static const String THANK_YOU = "Thank You for choosing Gin Finans";
 
   //Labels
   static const String LABEL_NEXT = "Next";
