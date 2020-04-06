@@ -18,17 +18,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).primaryColor,
-      child: Container(
-        color: Color(ColorPalette.BACKGROUND_WHITE),
-        padding: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 50),
-        child: Stack(
-          children: <Widget>[
-            SingleChildScrollView(
+      child: Stack(
+        children: <Widget>[
+          Image(
+            image: AssetImage('images/main_background.png'),
+            fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
+            alignment: Alignment.center,
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Padding(padding: EdgeInsets.only(bottom: 20.0)),
                   StateProgressBar(
                       Constants.totalStateCount, Constants.welcomePageState),
+                  Padding(padding: EdgeInsets.only(bottom: 40.0)),
                   _getWelcomeText(),
                   Padding(padding: EdgeInsets.only(bottom: 10.0)),
                   _getWelcomeSubTitle(),
@@ -38,12 +46,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _getNextButton(),
-            )
-          ],
-        ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _getNextButton(),
+          )
+        ],
       ),
     );
   }
@@ -58,7 +66,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   _validateEmail(email) {
-    if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)){
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email)) {
       return "Please provide valid email address";
     }
   }
@@ -109,20 +119,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   _getNextButton() {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: RaisedButton(
-        color: Color(ColorPalette.BUTTON_COLOR),
-        padding: EdgeInsets.all(15),
-        child: Text(
-          Strings.LABEL_NEXT,
-          style: Theme.of(context).textTheme.button,
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: RaisedButton(
+          color: Color(ColorPalette.BUTTON_COLOR),
+          padding: EdgeInsets.all(15),
+          child: Text(
+            Strings.LABEL_NEXT,
+            style: Theme.of(context).textTheme.button,
+          ),
+          onPressed: () {
+            if (_validate()) {
+              Navigator.pushNamed(context, Strings.ROUTE_REGISTRATION);
+            }
+          },
         ),
-        onPressed: () {
-          if(_validate()) {
-            Navigator.pushNamed(context, Strings.ROUTE_REGISTRATION);
-          }
-        },
       ),
     );
   }
