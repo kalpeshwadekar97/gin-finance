@@ -31,4 +31,12 @@ class Helper {
   static isAndroid(BuildContext context) {
     return Theme.of(context).platform == TargetPlatform.android;
   }
+
+  static String suffixWithZero(int num) {
+    if (num < 10) {
+      return "0" + num.toString();
+    } else {
+      return num.toString();
+    }
+  }
 }

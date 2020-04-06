@@ -14,8 +14,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
   String _password = '';
+
   // Initially password is obscure
   bool _obscureText = true;
+
   // Password complexity states
   HashMap<String, bool> _passwordComplexityStates = HashMap.of({
     Constants.UPPERCASE: false,
@@ -30,31 +32,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       appBar: AppBar(
         title: Text(Strings.CREATE_ACCOUNT),
       ),
+      resizeToAvoidBottomPadding: false,
       body: Container(
         color: Theme.of(context).primaryColor,
         height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                StateProgressBar(
-                    Constants.totalStateCount, Constants.registrationPageState),
-                _getTitleText(),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
-                _getSubTitleText(),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
-                _getPasswordTextFormField(),
-                Padding(padding: EdgeInsets.only(bottom: 40)),
-                _getPasswordComplexityStatus(),
-                Padding(padding: EdgeInsets.only(bottom: 50)),
-                _getPasswordComplexityLayout(),
-                Padding(padding: EdgeInsets.only(bottom: 70)),
-                _getNextButton()
-              ],
+        child: Stack(
+          children: <Widget>[
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    StateProgressBar(Constants.totalStateCount,
+                        Constants.registrationPageState),
+                    _getTitleText(),
+                    Padding(padding: EdgeInsets.only(bottom: 20)),
+                    _getSubTitleText(),
+                    Padding(padding: EdgeInsets.only(bottom: 20)),
+                    _getPasswordTextFormField(),
+                    Padding(padding: EdgeInsets.only(bottom: 40)),
+                    _getPasswordComplexityStatus(),
+                    Padding(padding: EdgeInsets.only(bottom: 50)),
+                    _getPasswordComplexityLayout(),
+                    Padding(padding: EdgeInsets.only(bottom: 20)),
+                  ],
+                ),
+              ),
             ),
-          ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _getNextButton(),
+            )
+          ],
         ),
       ),
     );
@@ -127,16 +137,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   _validate() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+      return true;
     } else {
-      setState(() {
-        _autoValidate = true;
-      });
+      return false;
     }
   }
 
   _validatePassword(password) {
-    var passwordRegex = '^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}';
-    return RegExp(passwordRegex).hasMatch(password);
+    var passwordRegex = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{10,}$';
+    if (!RegExp(passwordRegex).hasMatch(password)) {
+      return "Please provide valid password";
+    }
   }
 
   _getPasswordComplexityStatus() {
@@ -206,17 +217,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             : Text(
                 title,
                 style: Theme.of(context).textTheme.subhead.copyWith(
-                    color: Color(ColorPalette.WHITE_WITH_OPACITY), fontWeight: FontWeight.w500),
+                    color: Color(ColorPalette.WHITE_WITH_OPACITY),
+                    fontWeight: FontWeight.w500),
               ),
         Padding(
           padding: EdgeInsets.only(bottom: 10),
         ),
         Text(
           subtitle,
-          style: Theme.of(context)
-              .textTheme
-              .subtitle
-              .copyWith(color: Color(ColorPalette.WHITE_WITH_OPACITY), fontSize: 14),
+          style: Theme.of(context).textTheme.subtitle.copyWith(
+              color: Color(ColorPalette.WHITE_WITH_OPACITY), fontSize: 14),
         )
       ],
     );
@@ -229,24 +239,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         text.contains(RegExp(r'[a-z]'));
     _passwordComplexityStates[Constants.NUMBER] =
         text.contains(RegExp(r'[0-9]'));
-    _passwordComplexityStates[Constants.CHARACTER] =
-        text.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+    _passwordComplexityStates[Constants.CHARACTER] = text.length > 9;
   }
 
   _getNextButton() {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: RaisedButton(
-        color: Color(ColorPalette.BUTTON_COLOR),
-        padding: EdgeInsets.all(15),
-        child: Text(
-          Strings.LABEL_NEXT,
-          style: Theme.of(context).textTheme.button,
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: RaisedButton(
+          color: Color(ColorPalette.BUTTON_COLOR),
+          padding: EdgeInsets.all(15),
+          child: Text(
+            Strings.LABEL_NEXT,
+            style: Theme.of(context).textTheme.button,
+          ),
+          onPressed: () {
+            if (_validate())
+              Navigator.pushNamed(context, Strings.ROUTE_PERSONAL_INFORMATION);
+          },
         ),
-        onPressed: () {
-          _validate();
-          Navigator.pushNamed(context, Strings.ROUTE_PERSONAL_INFORMATION);
-        },
       ),
     );
   }

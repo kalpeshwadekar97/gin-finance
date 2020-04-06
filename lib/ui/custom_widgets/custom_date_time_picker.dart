@@ -38,6 +38,7 @@ class CustomDateTimePicker extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 30.0,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
                     _hint,

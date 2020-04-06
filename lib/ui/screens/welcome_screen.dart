@@ -21,37 +21,46 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       child: Container(
         color: Color(ColorPalette.BACKGROUND_WHITE),
         padding: EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 50),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: <Widget>[
-            StateProgressBar(
-                Constants.totalStateCount, Constants.welcomePageState),
-            _getWelcomeText(),
-            Padding(padding: EdgeInsets.only(bottom: 10.0)),
-            _getWelcomeSubTitle(),
-            Padding(padding: EdgeInsets.only(bottom: 20.0)),
-            _getEmailTextFormField(),
-            Padding(padding: EdgeInsets.only(bottom: 40.0)),
-            _getNextButton()
+            SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  StateProgressBar(
+                      Constants.totalStateCount, Constants.welcomePageState),
+                  _getWelcomeText(),
+                  Padding(padding: EdgeInsets.only(bottom: 10.0)),
+                  _getWelcomeSubTitle(),
+                  Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                  _getEmailTextFormField(),
+                  Padding(padding: EdgeInsets.only(bottom: 20.0)),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _getNextButton(),
+            )
           ],
         ),
       ),
     );
   }
 
-  _validate() {
+  bool _validate() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
+      return true;
     } else {
-      setState(() {
-        _autoValidate = true;
-      });
+      return false;
     }
   }
 
   _validateEmail(email) {
-    var emailRegex = '^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}';
-    return RegExp(emailRegex).hasMatch(email);
+    if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email)){
+      return "Please provide valid email address";
+    }
   }
 
   _getWelcomeText() {
@@ -110,8 +119,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           style: Theme.of(context).textTheme.button,
         ),
         onPressed: () {
-          _validate();
-          Navigator.pushNamed(context, Strings.ROUTE_REGISTRATION);
+          if(_validate()) {
+            Navigator.pushNamed(context, Strings.ROUTE_REGISTRATION);
+          }
         },
       ),
     );

@@ -12,6 +12,7 @@ class Strings {
   static const String PERSONAL_INFORMATION_SUBTITLE = "Please fill in the information below and your goal for digital saving.";
   static const String SCHEDULE_VIDEO_CALL = "Schedule Video Call";
   static const String SCHEDULE_VIDEO_CALL_SUBTITLE = "Choose the date and time that you preferred. we will send a link via email to make a video call on the schedule date and time.";
+  static const String THANK_YOU = "Thank You For Choosing Gin Finans";
 
   //Labels
   static const String LABEL_NEXT = "Next";
@@ -33,9 +34,12 @@ class Strings {
   static const String ROUTE_REGISTRATION = "registration_screen";
   static const String ROUTE_PERSONAL_INFORMATION = "personal_information_screen";
   static const String ROUTE_SCHEDULE_VIDEO_CALL = "video_call_screen";
+  static const String ROUTE_THANK_YOU = "thank_you";
 
   // Error messages
-  static const String error_select_goal = "Please select goal for activation";
-  static const String error_select_monthly_income = "Please select your monthly income";
-  static const String error_select_monthly_expense = "Please select your monthly expense";
+  static const String ERROR_SELECT_GOAL = "Please select goal for activation";
+  static const String ERROR_SELECT_MONTHLY_INCOME = "Please select your monthly income";
+  static const String ERROR_SELECT_MONTHLY_EXPENSE = "Please select your monthly expense";
+  static const String ERROR_SELECT_DATE = "Please select date";
+  static const String ERROR_SELECT_TIME = "Please select time";
 }

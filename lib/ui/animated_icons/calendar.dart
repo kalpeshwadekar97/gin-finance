@@ -5,7 +5,8 @@ class CalendarIcon extends StatefulWidget {
   _CalendarIconState createState() => _CalendarIconState();
 }
 
-class _CalendarIconState extends State<CalendarIcon> with SingleTickerProviderStateMixin {
+class _CalendarIconState extends State<CalendarIcon>
+    with SingleTickerProviderStateMixin {
   Animation<double> animation;
   AnimationController controller;
 
@@ -55,7 +56,11 @@ class Calendar extends AnimatedWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(_sizeTween.evaluate(animation)),
           ),
-          child: Center(child: Icon(Icons.calendar_today, color: Color(ColorPalette.PRIMARY_COLOR),)),
+          child: Center(
+              child: Icon(
+            Icons.calendar_today,
+            color: Color(ColorPalette.PRIMARY_COLOR),
+          )),
         ),
       ),
     );

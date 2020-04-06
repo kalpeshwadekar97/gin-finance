@@ -27,24 +27,31 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
         builder: (context) => Container(
           color: Theme.of(context).primaryColor,
           height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  StateProgressBar(Constants.totalStateCount,
-                      Constants.personalInformationPageState),
-                  _getTitleText(),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
-                  _getSubTitleText(),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
-                  _getDropDownMenu(),
-                  Padding(padding: EdgeInsets.only(bottom: 70)),
-                  _getNextButton(context)
-                ],
+          child: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      StateProgressBar(Constants.totalStateCount,
+                          Constants.personalInformationPageState),
+                      _getTitleText(),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      _getSubTitleText(),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      _getDropDownMenu(),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                    ],
+                  ),
+                ),
               ),
-            ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _getNextButton(context),
+              )
+            ],
           ),
         ),
       ),
@@ -67,7 +74,8 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   _getDropDownMenu() {
     return Column(
       children: <Widget>[
-        CustomDropDownMenu(Strings.LABEL_GOAL_FOR_ACTIVATION, Constants.GAOLS_LIST,
+        CustomDropDownMenu(
+            Strings.LABEL_GOAL_FOR_ACTIVATION, Constants.GAOLS_LIST,
             (selectedValue) {
           _selectedGoal = selectedValue;
         }),
@@ -88,29 +96,35 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   }
 
   _getNextButton(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: RaisedButton(
-        color: Color(ColorPalette.BUTTON_COLOR),
-        padding: EdgeInsets.all(15),
-        child: Text(
-          Strings.LABEL_NEXT,
-          style: Theme.of(context).textTheme.button,
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: RaisedButton(
+          color: Color(ColorPalette.BUTTON_COLOR),
+          padding: EdgeInsets.all(15),
+          child: Text(
+            Strings.LABEL_NEXT,
+            style: Theme.of(context).textTheme.button,
+          ),
+          onPressed: () {
+            _validate(context);
+          },
         ),
-        onPressed: () {
-          _validate(context);
-        },
       ),
     );
   }
 
   void _validate(BuildContext context) {
     if (_selectedGoal.isEmpty) {
-      Helper.showSnackbar(context, Strings.error_select_goal, Strings.LABEL_OKAY);
+      Helper.showSnackbar(
+          context, Strings.ERROR_SELECT_GOAL, Strings.LABEL_OKAY);
     } else if (_selectedMonthlyIncome.isEmpty) {
-      Helper.showSnackbar(context, Strings.error_select_monthly_income, Strings.LABEL_OKAY);
+      Helper.showSnackbar(
+          context, Strings.ERROR_SELECT_MONTHLY_INCOME, Strings.LABEL_OKAY);
     } else if (_selectedMonthlyExpense.isEmpty) {
-      Helper.showSnackbar(context, Strings.error_select_monthly_expense, Strings.LABEL_OKAY);
+      Helper.showSnackbar(
+          context, Strings.ERROR_SELECT_MONTHLY_EXPENSE, Strings.LABEL_OKAY);
     } else {
       // we can also have other validations like monthly expense should not be greater than monthly income
       // navigate to next screen

@@ -5,6 +5,7 @@ import 'package:gin_finance/constants/strings.dart';
 import 'package:gin_finance/ui/animated_icons/calendar.dart';
 import 'package:gin_finance/ui/custom_widgets/custom_date_time_picker.dart';
 import 'package:gin_finance/ui/custom_widgets/state_progress_bar.dart';
+import 'package:gin_finance/utility/helper.dart';
 
 class ScheduleVideoCallScreen extends StatefulWidget {
   @override
@@ -26,26 +27,33 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
         builder: (context) => Container(
           color: Theme.of(context).primaryColor,
           height: MediaQuery.of(context).size.height,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  StateProgressBar(Constants.totalStateCount,
-                      Constants.scheduleVideoCallPageState),
-                  _getCalendarIcon(),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
-                  _getTitleText(),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
-                  _getSubTitleText(),
-                  Padding(padding: EdgeInsets.only(bottom: 40)),
-                  _getDropDownMenu(context),
-                  Padding(padding: EdgeInsets.only(bottom: 70)),
-                  _getNextButton(context)
-                ],
+          child: Stack(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      StateProgressBar(Constants.totalStateCount,
+                          Constants.scheduleVideoCallPageState),
+                      _getCalendarIcon(),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      _getTitleText(),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      _getSubTitleText(),
+                      Padding(padding: EdgeInsets.only(bottom: 20)),
+                      _getDropDownMenu(context),
+                      Padding(padding: EdgeInsets.only(bottom: 20))
+                    ],
+                  ),
+                ),
               ),
-            ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: _getNextButton(context),
+              )
+            ],
           ),
         ),
       ),
@@ -91,7 +99,11 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
             Strings.LABEL_DATE,
             _selectedDate == null
                 ? Strings.LABEL_CHOOSE_DATE
-                : _selectedDate.toString(), (pickedDate) {
+                : Helper.suffixWithZero(_selectedDate.day) +
+                    "-" +
+                    Helper.suffixWithZero(_selectedDate.month) +
+                    "-" +
+                    _selectedDate.year.toString(), (pickedDate) {
           setState(() {
             _selectedDate = pickedDate;
           });
@@ -99,10 +111,12 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
         Padding(padding: EdgeInsets.only(bottom: 30)),
         CustomDateTimePicker(
             Constants.PICK_TIME,
-            Strings.LABEL_DATE,
+            Strings.LABEL_TIME,
             _selectedTime == null
                 ? Strings.LABEL_CHOOSE_TIME
-                : _selectedTime.toString(), (pickedTime) {
+                : Helper.suffixWithZero(_selectedTime.hour) +
+                    ":" +
+                    Helper.suffixWithZero(_selectedTime.minute), (pickedTime) {
           setState(() {
             _selectedTime = pickedTime;
           });
@@ -112,21 +126,35 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
   }
 
   _getNextButton(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: RaisedButton(
-        color: Color(ColorPalette.BUTTON_COLOR),
-        padding: EdgeInsets.all(15),
-        child: Text(
-          Strings.LABEL_NEXT,
-          style: Theme.of(context).textTheme.button,
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: RaisedButton(
+          color: Color(ColorPalette.BUTTON_COLOR),
+          padding: EdgeInsets.all(15),
+          child: Text(
+            Strings.LABEL_NEXT,
+            style: Theme.of(context).textTheme.button,
+          ),
+          onPressed: () {
+            _validate(context);
+          },
         ),
-        onPressed: () {
-          _validate(context);
-        },
       ),
     );
   }
 
-  void _validate(BuildContext context) {}
+  void _validate(BuildContext context) {
+    if (_selectedDate == null) {
+      Helper.showSnackbar(
+          context, Strings.ERROR_SELECT_DATE, Strings.LABEL_OKAY);
+    } else if (_selectedTime == null) {
+      Helper.showSnackbar(
+          context, Strings.ERROR_SELECT_TIME, Strings.LABEL_OKAY);
+    } else {
+      // navigate to next screen
+      Navigator.pushNamed(context, Strings.ROUTE_THANK_YOU);
+    }
+  }
 }

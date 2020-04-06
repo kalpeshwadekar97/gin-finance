@@ -13,19 +13,23 @@ class StateProgressBar extends StatefulWidget {
 class _StateProgressBarState extends State<StateProgressBar> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: widget._count,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: Row(
-              children: <Widget>[
-                _getState(++index),
-                index < widget._count ? _getLine() : Container()
-              ],
-            ),
-          );
-        });
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.12,
+      child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget._count,
+          shrinkWrap: true,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              child: Row(
+                children: <Widget>[
+                  _getState(++index),
+                  index < widget._count ? _getLine() : Container()
+                ],
+              ),
+            );
+          }),
+    );
   }
 
   _getState(int content) {
