@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gin_finance/constants/color_palette.dart';
 import 'package:gin_finance/constants/constants.dart';
 import 'package:gin_finance/constants/strings.dart';
+import 'package:gin_finance/ui/animated_icons/calendar.dart';
 import 'package:gin_finance/ui/custom_widgets/custom_date_time_picker.dart';
 import 'package:gin_finance/ui/custom_widgets/state_progress_bar.dart';
 
@@ -33,6 +34,8 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
                 children: <Widget>[
                   StateProgressBar(Constants.totalStateCount,
                       Constants.scheduleVideoCallPageState),
+                  _getCalendarIcon(),
+                  Padding(padding: EdgeInsets.only(bottom: 20)),
                   _getTitleText(),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   _getSubTitleText(),
@@ -44,6 +47,24 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  _getCalendarIcon() {
+    return Container(
+      height: 100,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          height: 80,
+          width: 80,
+          decoration: BoxDecoration(
+            color: Color(ColorPalette.CALENDAR_BUTTON_BACKGROUND),
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+          child: CalendarIcon(),
         ),
       ),
     );
