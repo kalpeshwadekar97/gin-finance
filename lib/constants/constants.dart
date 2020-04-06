@@ -6,6 +6,7 @@ class Constants {
   static const int welcomePageState = 1;
   static const int registrationPageState = 2;
   static const int personalInformationPageState = 3;
+  static const int scheduleVideoCallPageState = 3;
 
   // password complexity parameters
   static const String UPPERCASE = 'uppercase';
@@ -45,4 +46,6 @@ class Constants {
     'More than 1,00,000/-'
   ];
 
+  static const String PICK_DATE = "pick_date";
+  static const String PICK_TIME = "pick_time";
 }

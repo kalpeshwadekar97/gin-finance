@@ -10,13 +10,19 @@ class Strings {
   static const String ENTER_PASSWORD = "Please enter password";
   static const String PERSONAL_INFORMATION = "Personal Information";
   static const String PERSONAL_INFORMATION_SUBTITLE = "Please fill in the information below and your goal for digital saving.";
-  static const String GOAL_FOR_ACTIVATION = "Goal for activation";
-  static const String MONTHLY_INCOME = "monthly_income";
-  static const String MONTHLY_EXPENSE = "monthly_expense";
+  static const String SCHEDULE_VIDEO_CALL = "Schedule Video Call";
+  static const String SCHEDULE_VIDEO_CALL_SUBTITLE = "Choose the date and time that you preferred. we will send a link via email to make a video call on the schedule date and time.";
 
   //Labels
   static const String LABEL_NEXT = "Next";
   static const String LABEL_OKAY = "OKAY!";
+  static const String LABEL_GOAL_FOR_ACTIVATION = "Goal for activation";
+  static const String LABEL_MONTHLY_INCOME = "monthly_income";
+  static const String LABEL_MONTHLY_EXPENSE = "monthly_expense";
+  static const String LABEL_DATE = "Date";
+  static const String LABEL_CHOOSE_DATE = "- Choose Date -";
+  static const String LABEL_TIME = "Time";
+  static const String LABEL_CHOOSE_TIME = "- Choose Time -";
 
   //Hints
   static const String HINT_ENTER_EMAIL = "Email";
@@ -25,7 +31,8 @@ class Strings {
   // Routes
   static const String ROUTE_WELCOME = "welcome_screen";
   static const String ROUTE_REGISTRATION = "registration_screen";
-  static const String ROUTE_PERSONAL_INFORMATION = "personal_information";
+  static const String ROUTE_PERSONAL_INFORMATION = "personal_information_screen";
+  static const String ROUTE_SCHEDULE_VIDEO_CALL = "video_call_screen";
 
   // Error messages
   static const String error_select_goal = "Please select goal for activation";
