@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:gin_finance/constants/color_palette.dart';
 import 'package:gin_finance/constants/constants.dart';
 import 'package:gin_finance/constants/strings.dart';
-import 'package:gin_finance/ui/custom_widgets/custom_drop_down_menu.dart';
+import 'package:gin_finance/ui/custom_widgets/custom_date_time_picker.dart';
 import 'package:gin_finance/ui/custom_widgets/state_progress_bar.dart';
-import 'package:gin_finance/utility/helper.dart';
 
-class PersonalInformationScreen extends StatefulWidget {
+class ScheduleVideoCallScreen extends StatefulWidget {
   @override
-  _PersonalInformationScreenState createState() =>
-      _PersonalInformationScreenState();
+  _ScheduleVideoCallScreenState createState() =>
+      _ScheduleVideoCallScreenState();
 }
 
-class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
-  String _selectedGoal = '';
-  String _selectedMonthlyIncome = '';
-  String _selectedMonthlyExpense = '';
+class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
+  DateTime _selectedDate;
+  TimeOfDay _selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +32,12 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   StateProgressBar(Constants.totalStateCount,
-                      Constants.personalInformationPageState),
+                      Constants.scheduleVideoCallPageState),
                   _getTitleText(),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   _getSubTitleText(),
-                  Padding(padding: EdgeInsets.only(bottom: 20)),
-                  _getDropDownMenu(),
+                  Padding(padding: EdgeInsets.only(bottom: 40)),
+                  _getDropDownMenu(context),
                   Padding(padding: EdgeInsets.only(bottom: 70)),
                   _getNextButton(context)
                 ],
@@ -52,37 +50,42 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   }
 
   _getTitleText() {
-    return Text(Strings.PERSONAL_INFORMATION,
+    return Text(Strings.SCHEDULE_VIDEO_CALL,
         style: Theme.of(context).textTheme.title);
   }
 
   _getSubTitleText() {
-    return Text(Strings.PERSONAL_INFORMATION_SUBTITLE,
+    return Text(Strings.SCHEDULE_VIDEO_CALL_SUBTITLE,
         style: Theme.of(context)
             .textTheme
             .subtitle
             .copyWith(color: Color(ColorPalette.WHITE_WITH_OPACITY)));
   }
 
-  _getDropDownMenu() {
+  _getDropDownMenu(BuildContext context) {
     return Column(
       children: <Widget>[
-        CustomDropDownMenu(Strings.LABEL_GOAL_FOR_ACTIVATION, Constants.GAOLS_LIST,
-            (selectedValue) {
-          _selectedGoal = selectedValue;
+        CustomDateTimePicker(
+            Constants.PICK_DATE,
+            Strings.LABEL_DATE,
+            _selectedDate == null
+                ? Strings.LABEL_CHOOSE_DATE
+                : _selectedDate.toString(), (pickedDate) {
+          setState(() {
+            _selectedDate = pickedDate;
+          });
         }),
         Padding(padding: EdgeInsets.only(bottom: 30)),
-        CustomDropDownMenu(
-            Strings.LABEL_MONTHLY_INCOME, Constants.MONTHLY_INCOME_EXPENSE,
-            (selectedValue) {
-          _selectedMonthlyIncome = selectedValue;
+        CustomDateTimePicker(
+            Constants.PICK_TIME,
+            Strings.LABEL_DATE,
+            _selectedTime == null
+                ? Strings.LABEL_CHOOSE_TIME
+                : _selectedTime.toString(), (pickedTime) {
+          setState(() {
+            _selectedTime = pickedTime;
+          });
         }),
-        Padding(padding: EdgeInsets.only(bottom: 30)),
-        CustomDropDownMenu(
-            Strings.LABEL_MONTHLY_EXPENSE, Constants.MONTHLY_INCOME_EXPENSE,
-            (selectedValue) {
-          _selectedMonthlyExpense = selectedValue;
-        })
       ],
     );
   }
@@ -104,17 +107,5 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
     );
   }
 
-  void _validate(BuildContext context) {
-    if (_selectedGoal.isEmpty) {
-      Helper.showSnackbar(context, Strings.error_select_goal, Strings.LABEL_OKAY);
-    } else if (_selectedMonthlyIncome.isEmpty) {
-      Helper.showSnackbar(context, Strings.error_select_monthly_income, Strings.LABEL_OKAY);
-    } else if (_selectedMonthlyExpense.isEmpty) {
-      Helper.showSnackbar(context, Strings.error_select_monthly_expense, Strings.LABEL_OKAY);
-    } else {
-      // we can also have other validations like monthly expense should not be greater than monthly income
-      // navigate to next screen
-      Navigator.pushNamed(context, Strings.ROUTE_SCHEDULE_VIDEO_CALL);
-    }
-  }
+  void _validate(BuildContext context) {}
 }
