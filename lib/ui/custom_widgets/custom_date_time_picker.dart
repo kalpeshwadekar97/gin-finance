@@ -63,18 +63,34 @@ class CustomDateTimePicker extends StatelessWidget {
   }
 
   _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day + 1),
-        firstDate: Helper.getCurrentDate(),
-        lastDate: DateTime(2030));
-    if (picked != null) _callback(picked);
+    if (Helper.isAndroid(context)) {
+      final DateTime picked = await showDatePicker(
+          context: context,
+          initialDate: DateTime(DateTime.now().year, DateTime.now().month,
+              DateTime.now().day + 1),
+          firstDate: Helper.getCurrentDate(),
+          lastDate: DateTime(2030));
+      if (picked != null) _callback(picked);
+    } else {
+      CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.date,
+          onDateTimeChanged: (date) {
+            _callback(date);
+          });
+    }
   }
 
   _selectTime(BuildContext context) async {
-    TimeOfDay t = await showTimePicker(
-        context: context, initialTime: Helper.getCurrentTime());
-    if (t != null) _callback(t);
+    if (Helper.isAndroid(context)) {
+      TimeOfDay t = await showTimePicker(
+          context: context, initialTime: Helper.getCurrentTime());
+      if (t != null) _callback(t);
+    } else {
+      CupertinoDatePicker(
+          mode: CupertinoDatePickerMode.time,
+          onDateTimeChanged: (time) {
+            _callback(time);
+          });
+    }
   }
 }

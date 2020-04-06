@@ -8,8 +8,7 @@ class Helper {
           backgroundColor: Colors.redAccent,
           content: Text(
             msg,
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .body1
                 .copyWith(color: Colors.white, fontWeight: FontWeight.w700),
@@ -27,5 +26,9 @@ class Helper {
 
   static getCurrentTime() {
     return TimeOfDay.now();
+  }
+
+  static isAndroid(BuildContext context) {
+    return Theme.of(context).platform == TargetPlatform.android;
   }
 }
