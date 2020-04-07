@@ -17,9 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme
-          .of(context)
-          .primaryColor,
+      color: Theme.of(context).primaryColor,
       child: Stack(
         children: <Widget>[
           Image(
@@ -37,10 +35,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: <Widget>[
                   Padding(padding: EdgeInsets.only(bottom: 20.0)),
                   Align(
-                      alignment: Alignment.center,
-                      child: StateProgressBar(
-                          Constants.totalStateCount,
-                          Constants.welcomePageState),
+                    alignment: Alignment.center,
+                    child: StateProgressBar(
+                        Constants.totalStateCount, Constants.welcomePageState),
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 40.0)),
                   _getWelcomeText(),
@@ -73,7 +70,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   _validateEmail(email) {
     if (!RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email)) {
       return "Please provide valid email address";
     }
@@ -84,20 +81,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       text: TextSpan(children: <TextSpan>[
         TextSpan(
             text: Strings.WELCOME_TEXT,
-            style: Theme
-                .of(context)
+            style: Theme.of(context)
                 .textTheme
                 .headline
                 .copyWith(color: Colors.black)),
         TextSpan(
           text: Strings.WELCOME_FINANS_TEXT,
-          style: Theme
-              .of(context)
+          style: Theme.of(context)
               .textTheme
               .headline
-              .copyWith(color: Theme
-              .of(context)
-              .primaryColor),
+              .copyWith(color: Theme.of(context).primaryColor),
         ),
       ]),
     );
@@ -106,11 +99,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   _getWelcomeSubTitle() {
     return Text(Strings.WELCOME_SUBTITLE,
         style:
-        Theme
-            .of(context)
-            .textTheme
-            .subhead
-            .copyWith(color: Colors.black));
+            Theme.of(context).textTheme.subhead.copyWith(color: Colors.black));
   }
 
   _getEmailTextFormField() {
@@ -122,11 +111,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Form(
           key: _formKey,
           autovalidate: _autoValidate,
-          child: GinFinanceTextFormField(
+          child: CustomTextFormField(
               Strings.HINT_ENTER_EMAIL,
               Icon(Icons.email, color: Colors.grey),
               TextInputType.emailAddress,
-                  (email) => _validateEmail(email)),
+              (email) => _validateEmail(email)),
         ),
       ),
     );
@@ -136,19 +125,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Container(
       padding: EdgeInsets.all(20.0),
       child: SizedBox(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         child: RaisedButton(
           color: Color(ColorPalette.BUTTON_COLOR),
           padding: EdgeInsets.all(15),
           child: Text(
             Strings.LABEL_NEXT,
-            style: Theme
-                .of(context)
-                .textTheme
-                .button,
+            style: Theme.of(context).textTheme.button,
           ),
           onPressed: () {
             if (_validate()) {

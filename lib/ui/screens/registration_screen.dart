@@ -102,6 +102,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         obscureText: _obscureText,
         style: Theme.of(context).textTheme.title.copyWith(color: Colors.black),
         decoration: InputDecoration(
+            errorStyle: Theme.of(context)
+                .textTheme
+                .subtitle
+                .copyWith(color: Colors.red),
             fillColor: Colors.white,
             filled: true,
             suffixIcon: IconButton(
@@ -223,7 +227,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 title,
                 style: Theme.of(context).textTheme.subhead.copyWith(
                     color: Color(ColorPalette.WHITE_WITH_OPACITY),
-                    fontWeight: FontWeight.w500, fontSize: 29.0),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 29.0),
               ),
         Padding(
           padding: EdgeInsets.only(bottom: 10),
