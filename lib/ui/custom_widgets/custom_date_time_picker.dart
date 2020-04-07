@@ -97,7 +97,7 @@ class CustomDateTimePicker extends StatelessWidget {
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         barrierColor: Color(ColorPalette.TRANSPARENT_BACKGROUND),
-        transitionDuration: const Duration(milliseconds: 500),
+        transitionDuration: const Duration(milliseconds: 200),
         pageBuilder: (BuildContext buildContext, Animation animation,
             Animation secondaryAnimation) {
           return CustomCupertinoDateTimePicker(isDate, (selectedDate) {
