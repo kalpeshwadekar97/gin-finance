@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gin_finance/constants/color_palette.dart';
 import 'package:gin_finance/constants/constants.dart';
 import 'package:gin_finance/constants/strings.dart';
+import 'package:gin_finance/ui/custom_widgets/custom_icon_done.dart';
 import 'package:gin_finance/ui/custom_widgets/state_progress_bar.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -99,8 +100,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       autovalidate: _autoValidate,
       child: TextFormField(
         obscureText: _obscureText,
+        style: Theme.of(context).textTheme.title.copyWith(color: Colors.black),
         decoration: InputDecoration(
-            fillColor: Colors.white70,
+            fillColor: Colors.white,
             filled: true,
             suffixIcon: IconButton(
               icon: _obscureText
@@ -112,14 +114,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             focusedBorder: const OutlineInputBorder(
               borderRadius: const BorderRadius.all(
-                const Radius.circular(20.0),
+                const Radius.circular(10.0),
               ),
               borderSide: const BorderSide(
                   color: Color(ColorPalette.PRIMARY_COLOR), width: 0.0),
             ),
             border: OutlineInputBorder(
               borderRadius: const BorderRadius.all(
-                const Radius.circular(20.0),
+                const Radius.circular(10.0),
               ),
             ),
             hintText: Strings.HINT_CREATE_PASSWORD,
@@ -216,12 +218,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Column(
       children: <Widget>[
         isConditionSatisfied
-            ? Icon(Icons.done)
+            ? CustomIconDone()
             : Text(
                 title,
                 style: Theme.of(context).textTheme.subhead.copyWith(
                     color: Color(ColorPalette.WHITE_WITH_OPACITY),
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w500, fontSize: 29.0),
               ),
         Padding(
           padding: EdgeInsets.only(bottom: 10),

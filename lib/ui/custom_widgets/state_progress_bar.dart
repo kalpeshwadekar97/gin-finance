@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gin_finance/constants/color_palette.dart';
 
 class StateProgressBar extends StatefulWidget {
   final int _count;
@@ -39,7 +40,7 @@ class _StateProgressBarState extends State<StateProgressBar> {
       height: 50.0,
       child: PhysicalModel(
         borderRadius: new BorderRadius.circular(25.0),
-        color: content <= widget._activeCount ? Colors.green : Colors.white,
+        color: content <= widget._activeCount ? Color(ColorPalette.ACCENT_COLOR) : Colors.white,
         child: Container(
           child: Center(
             child: Text(
