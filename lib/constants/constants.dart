@@ -30,7 +30,7 @@ class Constants {
     'Very Strong'
   ];
 
-  static const List<String> GAOLS_LIST = [
+  static const List<String> GOALS_LIST = [
     '- Choose Option -',
     'Goal 1',
     'Goal 2',
@@ -38,12 +38,20 @@ class Constants {
     'Goal 4'
   ];
 
-  static const List<String> MONTHLY_INCOME_EXPENSE = [
+  static const List<String> MONTHLY_INCOME_LIST = [
     '- Choose Option -',
-    'Less than 10,000/-',
-    '10,000/- to 50,000/-',
-    '50,000/- to 1,00,000/-',
-    'More than 1,00,000/-'
+    'Income 1',
+    'Income 2',
+    'Income 3',
+    'Income 4'
+  ];
+
+  static const List<String> MONTHLY_EXPENSE_LIST = [
+    '- Choose Option -',
+    'Expense 1',
+    'Expense 2',
+    'Expense 3',
+    'Expense 4'
   ];
 
   static const String PICK_DATE = "pick_date";

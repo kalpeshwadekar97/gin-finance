@@ -14,8 +14,8 @@ class ScheduleVideoCallScreen extends StatefulWidget {
 }
 
 class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
-  DateTime _selectedDate;
-  TimeOfDay _selectedTime;
+  var _selectedDate;
+  var _selectedTime;
 
   @override
   Widget build(BuildContext context) {
@@ -102,11 +102,7 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
             Strings.LABEL_DATE,
             _selectedDate == null
                 ? Strings.LABEL_CHOOSE_DATE
-                : Helper.suffixWithZero(_selectedDate.day) +
-                    "-" +
-                    Helper.suffixWithZero(_selectedDate.month) +
-                    "-" +
-                    _selectedDate.year.toString(), (pickedDate) {
+                : Helper.transformDate(_selectedDate), (pickedDate) {
           setState(() {
             _selectedDate = pickedDate;
           });
@@ -117,9 +113,10 @@ class _ScheduleVideoCallScreenState extends State<ScheduleVideoCallScreen> {
             Strings.LABEL_TIME,
             _selectedTime == null
                 ? Strings.LABEL_CHOOSE_TIME
-                : Helper.suffixWithZero(_selectedTime.hour) +
-                    ":" +
-                    Helper.suffixWithZero(_selectedTime.minute), (pickedTime) {
+                : Helper.isAndroid(context)
+                    ? Helper.transformAndroidTime(_selectedTime)
+                    : Helper.transformCupertinoTime(_selectedTime),
+            (pickedTime) {
           setState(() {
             _selectedTime = pickedTime;
           });

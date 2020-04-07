@@ -78,19 +78,19 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
     return Column(
       children: <Widget>[
         CustomDropDownMenu(
-            Strings.LABEL_GOAL_FOR_ACTIVATION, Constants.GAOLS_LIST,
+            Strings.LABEL_GOAL_FOR_ACTIVATION, Constants.GOALS_LIST,
             (selectedValue) {
           _selectedGoal = selectedValue;
         }),
         Padding(padding: EdgeInsets.only(bottom: 30)),
         CustomDropDownMenu(
-            Strings.LABEL_MONTHLY_INCOME, Constants.MONTHLY_INCOME_EXPENSE,
+            Strings.LABEL_MONTHLY_INCOME, Constants.MONTHLY_INCOME_LIST,
             (selectedValue) {
           _selectedMonthlyIncome = selectedValue;
         }),
         Padding(padding: EdgeInsets.only(bottom: 30)),
         CustomDropDownMenu(
-            Strings.LABEL_MONTHLY_EXPENSE, Constants.MONTHLY_INCOME_EXPENSE,
+            Strings.LABEL_MONTHLY_EXPENSE, Constants.MONTHLY_EXPENSE_LIST,
             (selectedValue) {
           _selectedMonthlyExpense = selectedValue;
         })
@@ -119,13 +119,13 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   }
 
   void _validate(BuildContext context) {
-    if (_selectedGoal.isEmpty) {
+    if (_selectedGoal.isEmpty || _selectedGoal == Constants.GOALS_LIST[0]) {
       Helper.showSnackbar(
           context, Strings.ERROR_SELECT_GOAL, Strings.LABEL_OKAY);
-    } else if (_selectedMonthlyIncome.isEmpty) {
+    } else if (_selectedMonthlyIncome.isEmpty || _selectedMonthlyIncome == Constants.MONTHLY_INCOME_LIST[0]) {
       Helper.showSnackbar(
           context, Strings.ERROR_SELECT_MONTHLY_INCOME, Strings.LABEL_OKAY);
-    } else if (_selectedMonthlyExpense.isEmpty) {
+    } else if (_selectedMonthlyExpense.isEmpty || _selectedMonthlyExpense == Constants.MONTHLY_EXPENSE_LIST[0]) {
       Helper.showSnackbar(
           context, Strings.ERROR_SELECT_MONTHLY_EXPENSE, Strings.LABEL_OKAY);
     } else {

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gin_finance/constants/color_palette.dart';
 import 'package:gin_finance/constants/constants.dart';
+import 'package:gin_finance/ui/custom_widgets/custom_cupertino_date_time_picker.dart';
 import 'package:gin_finance/utility/helper.dart';
 
 class CustomDateTimePicker extends StatelessWidget {
@@ -65,19 +67,16 @@ class CustomDateTimePicker extends StatelessWidget {
 
   _selectDate(BuildContext context) async {
     if (Helper.isAndroid(context)) {
+      var currentDate = DateTime.now();
       final DateTime picked = await showDatePicker(
           context: context,
-          initialDate: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 1),
+          initialDate: DateTime(
+              currentDate.year, currentDate.month, currentDate.day + 1),
           firstDate: Helper.getCurrentDate(),
           lastDate: DateTime(2030));
       if (picked != null) _callback(picked);
     } else {
-      CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.date,
-          onDateTimeChanged: (date) {
-            _callback(date);
-          });
+      getCupertinoDatePicker(context, true);
     }
   }
 
@@ -87,11 +86,23 @@ class CustomDateTimePicker extends StatelessWidget {
           context: context, initialTime: Helper.getCurrentTime());
       if (t != null) _callback(t);
     } else {
-      CupertinoDatePicker(
-          mode: CupertinoDatePickerMode.time,
-          onDateTimeChanged: (time) {
-            _callback(time);
-          });
+      getCupertinoDatePicker(context, false);
     }
+  }
+
+  getCupertinoDatePicker(BuildContext context, bool isDate) {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: true,
+        barrierLabel:
+            MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrierColor: Color(ColorPalette.TRANSPARENT_BACKGROUND),
+        transitionDuration: const Duration(milliseconds: 500),
+        pageBuilder: (BuildContext buildContext, Animation animation,
+            Animation secondaryAnimation) {
+          return CustomCupertinoDateTimePicker(isDate, (selectedDate) {
+            _callback(selectedDate);
+          });
+        });
   }
 }

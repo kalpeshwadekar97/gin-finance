@@ -24,6 +24,8 @@ class Strings {
   static const String LABEL_CHOOSE_DATE = "- Choose Date -";
   static const String LABEL_TIME = "Time";
   static const String LABEL_CHOOSE_TIME = "- Choose Time -";
+  static const String LABEL_CANCEL = "Cancel";
+  static const String LABEL_DONE = "Done";
 
   //Hints
   static const String HINT_ENTER_EMAIL = "Email";

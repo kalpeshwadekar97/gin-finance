@@ -39,4 +39,17 @@ class Helper {
       return num.toString();
     }
   }
+
+  static String transformDate(DateTime date) {
+    return "${suffixWithZero(date.day)}/${suffixWithZero(date.month)}/${date.year}";
+  }
+
+  static String transformAndroidTime(TimeOfDay time) {
+    return "${suffixWithZero(time.hour)}:${suffixWithZero(time.minute)}";
+  }
+
+  static String transformCupertinoTime(Duration time) {
+    var timeSplit = time.toString().split(":");
+    return "${timeSplit[0]}:${timeSplit[1]}";
+  }
 }
